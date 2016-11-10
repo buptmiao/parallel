@@ -7,6 +7,12 @@
 
 A golang parallel library, used for business logic aggregation and refactory without changing function declaration.
 
+### Install
+
+```
+go get github.com/buptmiao/parallel
+```
+
 ### Usage
 
 #### eg.1

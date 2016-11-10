@@ -23,10 +23,14 @@ func NewParallel() *Parallel {
 
 // Register add a new pipeline with a single handler info parallel
 func (p *Parallel) Register(f interface{}, args ...interface{}) *Handler {
+	return p.NewPipeline().Register(f, args...)
+}
+
+// NewPipeline create a new pipeline of parallel
+func (p *Parallel) NewPipeline() *Pipeline {
 	pipe := NewPipeline()
-	h := pipe.Register(f, args...)
 	p.Add(pipe)
-	return h
+	return pipe
 }
 
 // Add add new pipelines to parallel
