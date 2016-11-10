@@ -45,8 +45,8 @@ func (h *Handler) Do() {
 	if typ.Kind() != reflect.Func {
 		panic(ErrArgNotFunction)
 	}
-	//check input length
-	if typ.NumIn() != len(h.args) {
+	//check input length, only check '>' is to allow varargs.
+	if typ.NumIn() > len(h.args) {
 		panic(ErrInArgLenNotMatch)
 	}
 	//check output length
