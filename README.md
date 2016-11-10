@@ -5,12 +5,12 @@
 
 [zh_CN](https://github.com/buptmiao/parallel/blob/master/README_CN.md)
 
-A golang parallel library, used for buz aggregation and refactor without changing declaration of function.
+A golang parallel library, used for business logic aggregation and refactory without changing function declaration.
 
 ### Usage
 
 #### eg.1
-There are three method: testjobA, testjobB, testjobC, execute them by parallel:
+There are three methods: testjobA, testjobB, testjobC, execute them in parallel:
 ```go
 import (
 	"github.com/buptmiao/parallel"
