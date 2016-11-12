@@ -6,10 +6,11 @@ import (
 
 // Parallel instance, which executes pipelines by parallel
 type Parallel struct {
-	wg       *sync.WaitGroup
-	pipes    []*Pipeline
-	wgChild  *sync.WaitGroup
-	children []*Parallel
+	wg        *sync.WaitGroup
+	pipes     []*Pipeline
+	wgChild   *sync.WaitGroup
+	children  []*Parallel
+	exception *Handler
 }
 
 // NewParallel creates a new Parallel instance
@@ -19,6 +20,14 @@ func NewParallel() *Parallel {
 	res.wgChild = new(sync.WaitGroup)
 	res.pipes = make([]*Pipeline, 0, 10)
 	return res
+}
+
+// Except set the exception handling routine, when unexpected panic occur
+// this routine will be executed.
+func (p *Parallel) Except(f interface{}, args ...interface{}) *Handler {
+	h := NewHandler(f, args...)
+	p.exception = h
+	return h
 }
 
 // Register add a new pipeline with a single handler info parallel
@@ -80,12 +89,17 @@ func (p *Parallel) do() {
 	}
 }
 
-// exec pipeline secure
+// exec pipeline safely
 func (p *Parallel) secure(pipe *Pipeline) {
 	defer func() {
 		err := recover()
-		if err != nil && (err == ErrArgNotFunction || err == ErrInArgLenNotMatch || err == ErrOutArgLenNotMatch || err == ErrRecvArgTypeNotPtr || err == ErrRecvArgNil) {
-			panic(err)
+		if err != nil {
+			if err == ErrArgNotFunction || err == ErrInArgLenNotMatch || err == ErrOutArgLenNotMatch || err == ErrRecvArgTypeNotPtr || err == ErrRecvArgNil {
+				panic(err)
+			}
+			if p.exception != nil {
+				p.exception.OnExcept(err)
+			}
 		}
 		p.wg.Done()
 	}()

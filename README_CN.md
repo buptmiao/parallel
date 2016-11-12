@@ -13,7 +13,7 @@ go get github.com/buptmiao/parallel
 
 ### 用法
 
-#### 例子1
+#### 例子1 
 testjobA, testjobB, testjobC为三个现有的接口, 并行化它们只需要如下代码:
 ```go
 import (
@@ -65,7 +65,7 @@ jobA  jobB   jobC
      final
 ```
 
-参考如下[demo](https://github.com/buptmiao/parallel/tree/master/example/demo.go):
+参考如下[demo](https://github.com/buptmiao/parallel/tree/master/examples/demo1/demo.go):
 
 ```go
 import (
@@ -131,3 +131,25 @@ func main() {
 	}
 }
 ```
+#### 例子3
+```go
+// handle the panic
+func exceptionHandler(topic string, e interface{}) {
+	fmt.Println(topic, e)
+}
+
+// will panic
+func exceptionJob() {
+	var a map[string]int
+	//assignment to entry in nil map
+	a["123"] = 1
+}
+
+func main() {
+	p := parallel.NewParallel()
+	p.Register(exceptionJob)
+	p.Except(exceptionHandler, "topic1")
+	p.Run()
+}
+```
+#### [更多例子](https://github.com/buptmiao/parallel/tree/master/examples)

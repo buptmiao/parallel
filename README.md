@@ -65,7 +65,7 @@ jobA  jobB   jobC
      final
 ```
 
-Refer to the [demo](https://github.com/buptmiao/parallel/tree/master/example/demo.go) below:
+Refer to the [demo](https://github.com/buptmiao/parallel/tree/master/examples/demo1/demo.go) below:
 
 ```go
 import (
@@ -131,3 +131,26 @@ func main() {
 	}
 }
 ```
+
+#### eg.3
+```go
+// handle the panic
+func exceptionHandler(topic string, e interface{}) {
+	fmt.Println(topic, e)
+}
+
+// will panic
+func exceptionJob() {
+	var a map[string]int
+	//assignment to entry in nil map
+	a["123"] = 1
+}
+
+func main() {
+	p := parallel.NewParallel()
+	p.Register(exceptionJob)
+	p.Except(exceptionHandler, "topic1")
+	p.Run()
+}
+```
+#### [more examples](https://github.com/buptmiao/parallel/tree/master/examples)

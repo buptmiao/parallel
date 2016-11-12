@@ -79,3 +79,10 @@ func (h *Handler) Do() {
 		v.Elem().Set(out[i])
 	}
 }
+
+// OnExcept will executed by parallel when application panic occur
+// Note that the type of e is unknown.
+func (h *Handler) OnExcept(e interface{}) {
+	h.args = append(h.args, e)
+	h.Do()
+}
