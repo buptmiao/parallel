@@ -133,6 +133,8 @@ func main() {
 ```
 
 #### eg.3
+
+By default, Parallel will ignore panics of jobs. But parallel supports customized exception handler, which is used for dealing with unexpected panics. For example, alerting or logging.
 ```go
 // handle the panic
 func exceptionHandler(topic string, e interface{}) {
@@ -149,6 +151,7 @@ func exceptionJob() {
 func main() {
 	p := parallel.NewParallel()
 	p.Register(exceptionJob)
+	// miss the last argument on purpose
 	p.Except(exceptionHandler, "topic1")
 	p.Run()
 }

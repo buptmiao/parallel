@@ -132,6 +132,8 @@ func main() {
 }
 ```
 #### 例子3
+
+默认情况下, 任务意外panic会被忽略. Parallel支持自定义exception handler,可以用来处理panic. 比如报警或log.
 ```go
 // handle the panic
 func exceptionHandler(topic string, e interface{}) {
@@ -148,6 +150,7 @@ func exceptionJob() {
 func main() {
 	p := parallel.NewParallel()
 	p.Register(exceptionJob)
+	// 故意漏掉最后一个参数
 	p.Except(exceptionHandler, "topic1")
 	p.Run()
 }
