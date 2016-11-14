@@ -52,6 +52,7 @@ func (p *Parallel) Add(pipes ...*Pipeline) *Parallel {
 // NewChild create a new child of p
 func (p *Parallel) NewChild() *Parallel {
 	child := NewParallel()
+	child.exception = p.exception
 	p.AddChildren(child)
 	return child
 }
