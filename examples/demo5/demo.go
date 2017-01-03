@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/buptmiao/parallel"
 	"fmt"
+	"github.com/buptmiao/parallel"
 )
 
 func exceptionHandler(topic string, e interface{}) {

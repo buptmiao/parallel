@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/buptmiao/parallel.svg?branch=master)](https://travis-ci.org/buptmiao/parallel)
 [![Coverage Status](https://coveralls.io/repos/github/buptmiao/parallel/badge.svg?branch=master)](https://coveralls.io/github/buptmiao/parallel?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/buptmiao/parallel)](https://goreportcard.com/report/github.com/buptmiao/parallel)
 
 [zh_CN](https://github.com/buptmiao/parallel/blob/master/README_CN.md)
 

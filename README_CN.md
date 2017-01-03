@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/buptmiao/parallel.svg?branch=master)](https://travis-ci.org/buptmiao/parallel)
 [![Coverage Status](https://coveralls.io/repos/github/buptmiao/parallel/badge.svg?branch=master)](https://coveralls.io/github/buptmiao/parallel?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/buptmiao/parallel)](https://goreportcard.com/report/github.com/buptmiao/parallel)
 
 一个go语言并行程序库, 用于不改变现有接口声明前提下的业务聚合或者重构.
 

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/buptmiao/parallel"
 	"fmt"
+	"github.com/buptmiao/parallel"
 )
 
 /*
@@ -13,7 +13,7 @@ jobB     /
   |     /
   |    /
   result
- */
+*/
 
 func testJobA() string {
 	return "job"
@@ -38,5 +38,5 @@ func main() {
 	p.Register(testJobC, 3).SetReceivers(&y)
 	// block here
 	p.Run()
-	fmt.Println(res, x, y)  //job 3 -3
+	fmt.Println(res, x, y) //job 3 -3
 }

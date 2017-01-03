@@ -28,7 +28,7 @@ func main() {
 	// block here
 	p.Run()
 
-	if s != "job" || x != 3 || y != -3{
+	if s != "job" || x != 3 || y != -3 {
 		panic("unexpected result")
 	}
 }

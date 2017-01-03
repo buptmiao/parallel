@@ -6,12 +6,11 @@ import (
 )
 
 var (
-	ErrArgNotFunction    = errors.New("argument type not function")
-	ErrInArgLenNotMatch  = errors.New("input arguments length not match")
-	ErrOutArgLenNotMatch = errors.New("output arguments length not match")
-
-	ErrRecvArgTypeNotPtr = errors.New("receiver argument type is not pointer")
-	ErrRecvArgNil        = errors.New("receiver argument must not be nil")
+	ErrArgNotFunction    = errors.New("argument type not function")            //argument type not function
+	ErrInArgLenNotMatch  = errors.New("input arguments length not match")      //input arguments length not match
+	ErrOutArgLenNotMatch = errors.New("output arguments length not match")     //output arguments length not match
+	ErrRecvArgTypeNotPtr = errors.New("receiver argument type is not pointer") //receiver argument type is not pointer
+	ErrRecvArgNil        = errors.New("receiver argument must not be nil")     //receiver argument must not be nil
 )
 
 // Handler instance

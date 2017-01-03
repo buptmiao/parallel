@@ -2,6 +2,7 @@ package parallel
 
 import (
 	"sync"
+	"time"
 )
 
 // Parallel instance, which executes pipelines by parallel
@@ -105,4 +106,17 @@ func (p *Parallel) secure(pipe *Pipeline) {
 		p.wg.Done()
 	}()
 	pipe.Do()
+}
+
+// RunWithTimeOut start up all the jobs, and time out after d duration
+func (p *Parallel) RunWithTimeOut(d time.Duration) {
+	success := make(chan struct{}, 1)
+	go func() {
+		p.Run()
+		success <- struct{}{}
+	}()
+	select {
+	case <-success:
+	case <-time.After(d):
+	}
 }

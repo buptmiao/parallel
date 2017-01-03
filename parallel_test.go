@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/buptmiao/parallel"
 	"testing"
+	"time"
 )
 
 /*
@@ -85,4 +86,28 @@ func TestException(t *testing.T) {
 	p.Register(exceptionJob)
 	p.Except(exceptionHandler, "topic1")
 	p.Run()
+}
+
+func TestTimeout(t *testing.T) {
+	p := parallel.NewParallel()
+	s := time.Now()
+	p.Register(time.Sleep, time.Second*5)
+	p.RunWithTimeOut(time.Second * 3)
+	elapse := time.Now().Sub(s)
+
+	if elapse > time.Second*4 || elapse < time.Second*2 {
+		panic("timeout is not accurate")
+	}
+}
+
+func TestTimeout2(t *testing.T) {
+	p := parallel.NewParallel()
+	s := time.Now()
+	p.Register(time.Sleep, time.Second*3)
+	p.RunWithTimeOut(time.Second * 5)
+	elapse := time.Now().Sub(s)
+
+	if elapse > time.Second*4 || elapse < time.Second*2 {
+		panic("timeout is not accurate")
+	}
 }
