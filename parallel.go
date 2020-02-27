@@ -101,6 +101,8 @@ func (p *Parallel) secure(pipe *Pipeline) {
 			}
 			if p.exception != nil {
 				p.exception.OnExcept(err)
+			}else {
+				panic(err)
 			}
 		}
 		p.wg.Done()
