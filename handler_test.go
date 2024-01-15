@@ -22,7 +22,7 @@ func TestNewHandler(t *testing.T) {
 	h.SetReceivers(&result)
 	h.Do()
 	if result != 2 {
-		panic(fmt.Errorf("expect 2, but %s", result))
+		panic(fmt.Errorf("expect 2, but %d", result))
 	}
 }
 

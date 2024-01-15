@@ -88,6 +88,14 @@ func TestException(t *testing.T) {
 	p.Run()
 }
 
+func TestMultipleException(t *testing.T) {
+	p := parallel.NewParallel()
+	p.Register(exceptionJob)
+	p.Register(exceptionJob)
+	p.Except(exceptionHandler, "topic1")
+	p.Run()
+}
+
 func TestTimeout(t *testing.T) {
 	p := parallel.NewParallel()
 	s := time.Now()

@@ -100,7 +100,16 @@ func (p *Parallel) secure(pipe *Pipeline) {
 				panic(err)
 			}
 			if p.exception != nil {
-				p.exception.OnExcept(err)
+				// deep copy Handler and args
+				exception := &Handler{
+					f:         p.exception.f,
+					args:      make([]interface{}, 0, len(p.exception.args)),
+					receivers: p.exception.receivers,
+				}
+				for _, arg := range p.exception.args {
+					exception.args = append(exception.args, arg)
+				}
+				exception.OnExcept(err)
 			}
 		}
 		p.wg.Done()
